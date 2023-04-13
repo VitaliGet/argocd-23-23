@@ -1,0 +1,184 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  creationTimestamp: "2023-04-13T12:17:17Z"
+  generation: 33
+  name: helm-jenkins
+  namespace: argocd
+  resourceVersion: "1398808"
+  uid: 0cfeffca-5388-4a87-8fce-132fea1e7859
+spec:
+  destination:
+    namespace: ci-cd
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: jenkins
+    repoURL: https://vitaliget.github.io/helm-23-23/
+    targetRevision: 0.1.0
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+status:
+  health:
+    status: Healthy
+  history:
+  - deployStartedAt: "2023-04-13T12:17:18Z"
+    deployedAt: "2023-04-13T12:17:20Z"
+    id: 0
+    revision: 0.1.0
+    source:
+      chart: jenkins
+      repoURL: https://vitaliget.github.io/helm-23-23/
+      targetRevision: 0.1.0
+  operationState:
+    finishedAt: "2023-04-13T12:17:21Z"
+    message: successfully synced (all tasks run)
+    operation:
+      initiatedBy:
+        automated: true
+      retry:
+        limit: 5
+      sync:
+        prune: true
+        revision: 0.1.0
+    phase: Succeeded
+    startedAt: "2023-04-13T12:17:18Z"
+    syncResult:
+      resources:
+      - group: ""
+        hookPhase: Running
+        kind: Namespace
+        message: namespace/ci-cd configured
+        name: ci-cd
+        namespace: ci-cd
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: ""
+        hookPhase: Running
+        kind: ConfigMap
+        message: configmap/basic-security configured
+        name: basic-security
+        namespace: ci-cd
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: ""
+        hookPhase: Running
+        kind: ConfigMap
+        message: configmap/jenkins-config configured
+        name: jenkins-config
+        namespace: ci-cd
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: rbac.authorization.k8s.io
+        hookPhase: Running
+        kind: ClusterRoleBinding
+        message: 'clusterrolebinding.rbac.authorization.k8s.io/helm-jenkins reconciled.
+          reconciliation required update. clusterrolebinding.rbac.authorization.k8s.io/helm-jenkins
+          configured. Warning: resource clusterrolebindings/helm-jenkins is missing
+          the kubectl.kubernetes.io/last-applied-configuration annotation which is
+          required by  apply.  apply should only be used on resources created declaratively
+          by either  create --save-config or  apply. The missing annotation will be
+          patched automatically.'
+        name: helm-jenkins
+        namespace: ci-cd
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: ""
+        hookPhase: Running
+        kind: Service
+        message: service/helm-jenkins created
+        name: helm-jenkins
+        namespace: ci-cd
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: apps
+        hookPhase: Running
+        kind: Deployment
+        message: deployment.apps/helm-jenkins created
+        name: helm-jenkins
+        namespace: ci-cd
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: networking.k8s.io
+        hookPhase: Running
+        kind: Ingress
+        message: ingress.networking.k8s.io/helm-jenkins created
+        name: helm-jenkins
+        namespace: ci-cd
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      revision: 0.1.0
+      source:
+        chart: jenkins
+        repoURL: https://vitaliget.github.io/helm-23-23/
+        targetRevision: 0.1.0
+  reconciledAt: "2023-04-13T13:00:46Z"
+  resources:
+  - kind: ConfigMap
+    name: basic-security
+    namespace: ci-cd
+    status: Synced
+    version: v1
+  - kind: ConfigMap
+    name: jenkins-config
+    namespace: ci-cd
+    status: Synced
+    version: v1
+  - kind: Namespace
+    name: ci-cd
+    status: Synced
+    version: v1
+  - health:
+      status: Healthy
+    kind: Service
+    name: helm-jenkins
+    namespace: ci-cd
+    status: Synced
+    version: v1
+  - group: apps
+    health:
+      status: Healthy
+    kind: Deployment
+    name: helm-jenkins
+    namespace: ci-cd
+    status: Synced
+    version: v1
+  - group: networking.k8s.io
+    health:
+      status: Healthy
+    kind: Ingress
+    name: helm-jenkins
+    namespace: ci-cd
+    status: Synced
+    version: v1
+  - group: rbac.authorization.k8s.io
+    kind: ClusterRoleBinding
+    name: helm-jenkins
+    status: Synced
+    version: v1
+  sourceType: Helm
+  summary:
+    externalURLs:
+    - http://helm-jenkins.k8s-4.sa/
+    images:
+    - jfrog.it-academy.by/public/jenkins-ci:vgetmanovich
+  sync:
+    comparedTo:
+      destination:
+        namespace: ci-cd
+        server: https://kubernetes.default.svc
+      source:
+        chart: jenkins
+        repoURL: https://vitaliget.github.io/helm-23-23/
+        targetRevision: 0.1.0
+    revision: 0.1.0
+    status: Synced
